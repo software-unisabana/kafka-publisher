@@ -19,7 +19,7 @@ public class CustomerController {
 		this.customerService = customerService;
 	}
 	
-	@PostMapping
+	@PostMapping(path = "/guardar")
 	public Customer save(@RequestBody Customer customer) {
 		return this.customerService.save(customer);
 	}

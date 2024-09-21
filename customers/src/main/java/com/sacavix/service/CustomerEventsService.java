@@ -15,24 +15,22 @@ import java.util.UUID;
 
 @Component
 public class CustomerEventsService {
-	
-	@Autowired
-	private KafkaTemplate<String, Event<?>> producer;
-	
-	@Value("${topic.customer.name:customers}")
-	private String topicCustomer;
-	
-	public void publish(Customer customer) {
 
-		CustomerCreatedEvent created = new CustomerCreatedEvent();
-		created.setData(customer);
-		created.setId(UUID.randomUUID().toString());
-		created.setType(EventType.CREATED);
-		created.setDate(new Date());
+    @Autowired
+    private KafkaTemplate<String, Event<?>> producer;
 
-		this.producer.send(topicCustomer, created);
-	}
-	
-	
+    private final String topicCustomer = "crc";
+
+    public void publish(Customer customer) {
+
+        CustomerCreatedEvent created = new CustomerCreatedEvent();
+        created.setData(customer);
+        created.setId(UUID.randomUUID().toString());
+        created.setType(EventType.CREATED);
+        created.setDate(new Date());
+
+        this.producer.send(topicCustomer, created);
+    }
+
 
 }

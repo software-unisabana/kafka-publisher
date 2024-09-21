@@ -14,8 +14,9 @@ CustomerEventsService {
 
     @KafkaListener(
             containerFactory = "kafkaListenerContainerFactory",
-            groupId = "grupo1",
-            topicPartitions = {@TopicPartition(topic = "${topic.customer.name:customers}", partitions = {"0", "1"})})
+            groupId = "Bancolombia",
+            topics = "crc")
+            //topicPartitions = {@TopicPartition(topic = "${topic.customer.name:customers}", partitions = {"0", "1"})})
     public void consumer(Event<?> event) {
         if (event.getClass().isAssignableFrom(CustomerCreatedEvent.class)) {
             CustomerCreatedEvent customerCreatedEvent = (CustomerCreatedEvent) event;
